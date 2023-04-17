@@ -22,7 +22,7 @@ import org.w3c.dom.Text
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     val mainViewModel by lazy {
-        ViewModelProvider(this,defaultViewModelProviderFactory)[MainViewModel::class.java]
+        ViewModelProvider(this, defaultViewModelProviderFactory)[MainViewModel::class.java]
     }
 
     lateinit var binding: ActivityMainBinding
@@ -42,21 +42,19 @@ class MainActivity : AppCompatActivity() {
 
     private fun observeData() {
         lifecycleScope.launch {
-            mainViewModel.state.collect{
-                when(it){
-                    is ApiState.Loading ->{
-                         // load some progress bar
+            mainViewModel.state.collect {
+                when (it) {
+                    is ApiState.Loading -> {
+                        // load some progress bar
                     }
-                    is ApiState.Success ->{
-                         // show some stuff
+                    is ApiState.Success -> {
+                        // show some stuff
                     }
-                    is ApiState.Error ->{
+                    is ApiState.Error -> {
                         // show exception
                     }
                 }
             }
         }
     }
-
-
 }

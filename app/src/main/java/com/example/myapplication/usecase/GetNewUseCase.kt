@@ -5,5 +5,5 @@ import com.example.myapplication.repo.GetNewsModel
 import kotlinx.coroutines.flow.Flow
 
 interface GetNewUseCase {
-    suspend fun invoke():Flow<ApiState<GetNewsModel>>
+    suspend fun invoke(): Flow<ApiState<GetNewsModel>>
 }

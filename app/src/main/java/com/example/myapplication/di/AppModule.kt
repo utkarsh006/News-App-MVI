@@ -18,7 +18,10 @@ class AppModule {
 
     @Provides
     fun provideRetrofit(): Retrofit {
-        return Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build()
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
     }
 
     @Provides
@@ -32,7 +35,7 @@ class AppModule {
     }
 
     @Provides
-    fun provideUseCase(repository: NewRepository): GetNewUseCase{
+    fun provideUseCase(repository: NewRepository): GetNewUseCase {
         return GetNewUseCaseImpl(repository)
     }
 

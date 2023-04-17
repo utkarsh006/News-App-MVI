@@ -6,7 +6,7 @@ import com.example.myapplication.repo.NewRepository
 import com.example.myapplication.repo.RepoImpl
 import kotlinx.coroutines.flow.Flow
 
-class GetNewUseCaseImpl(private val repository: NewRepository) :GetNewUseCase {
+class GetNewUseCaseImpl(private val repository: NewRepository) : GetNewUseCase {
     override suspend fun invoke(): Flow<ApiState<GetNewsModel>> {
         return repository.getNews()
     }

@@ -21,32 +21,29 @@ class MainViewModel @Inject constructor(private val useCase: GetNewUseCase) : Vi
 
     val mainIntent: Channel<MainIntent> = Channel(Channel.UNLIMITED)
 
-
     private val mutableState = MutableStateFlow<ApiState<GetNewsModel>>(ApiState.Loading)
     val state: StateFlow<ApiState<GetNewsModel>>
         get() = mutableState.asStateFlow()
-
 
     init {
         handleIntent()
     }
 
-    fun handleIntent() {
+    private fun handleIntent() {
         viewModelScope.launch {
             mainIntent.consumeAsFlow().collect {
                 when (it) {
                     is MainIntent.GetNews -> {
                         getNews()
                     }
-                    is MainIntent.Refresh ->{
-
+                    is MainIntent.Refresh -> {
                     }
                 }
             }
         }
     }
 
-    fun getNews() {
+    private fun getNews() {
         viewModelScope.launch(Dispatchers.IO) {
             useCase.invoke().collect {
                 mutableState.value = it
