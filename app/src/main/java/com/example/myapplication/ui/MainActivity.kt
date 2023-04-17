@@ -45,13 +45,13 @@ class MainActivity : AppCompatActivity() {
             mainViewModel.state.collect{
                 when(it){
                     is ApiState.Loading ->{
-
+                         // load some progress bar
                     }
                     is ApiState.Success ->{
-
+                         // show some stuff
                     }
                     is ApiState.Error ->{
-
+                        // show exception
                     }
                 }
             }
