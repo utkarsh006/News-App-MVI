@@ -2,24 +2,17 @@ package com.example.myapplication.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
-import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
-import com.example.myapplication.R
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.myapplication.adapter.NewsAdapter
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.intent.MainIntent
 import com.example.myapplication.repo.ApiState
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import org.w3c.dom.Text
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -35,12 +28,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         observeData()
 
-        binding.dummyTest.setOnClickListener {
             lifecycleScope.launch {
                 mainViewModel.mainIntent.send(MainIntent.GetNews)
             }
-        }
+
     }
+
 
     private fun observeData() {
         lifecycleScope.launch {
@@ -50,7 +43,13 @@ class MainActivity : AppCompatActivity() {
                         // load some progress bar
                     }
                     is ApiState.Success -> {
-                        Log.v("Hello",it.data.totalHits.toString() )
+                        val recyclerView = binding.dummyTest
+                        recyclerView.layoutManager = LinearLayoutManager(this@MainActivity,LinearLayoutManager.VERTICAL,false)
+
+                        val adapter = NewsAdapter(it.data.articles)
+
+                        recyclerView.adapter= adapter
+
                     }
                     is ApiState.Error -> {
                         // show exception
