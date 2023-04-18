@@ -1,8 +1,1 @@
 - This news app follows MVI Architecture.
-- Concepts used : 
-  - UI through XML
-  - MVI Architecture
-  - Navigation Components
-  - Coroutines & Flows
-  - Retrofit
-  - RoomDB
