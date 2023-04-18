@@ -2,8 +2,10 @@ package com.example.myapplication.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import com.example.myapplication.R
@@ -48,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                         // load some progress bar
                     }
                     is ApiState.Success -> {
-                        // show some stuff
+                        Log.v("Hello",it.data.totalHits.toString() )
                     }
                     is ApiState.Error -> {
                         // show exception
