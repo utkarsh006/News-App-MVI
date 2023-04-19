@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-
     private fun observeData() {
         lifecycleScope.launch {
             mainViewModel.state.collect {
@@ -42,15 +41,16 @@ class MainActivity : AppCompatActivity() {
                     is ApiState.Loading -> {
                         // load some progress bar
                     }
+
                     is ApiState.Success -> {
                         val recyclerView = binding.dummyTest
                         recyclerView.layoutManager = LinearLayoutManager(this@MainActivity,LinearLayoutManager.VERTICAL,false)
 
                         val adapter = NewsAdapter(it.data.articles)
-
                         recyclerView.adapter= adapter
 
                     }
+
                     is ApiState.Error -> {
                         // show exception
                     }

@@ -5,6 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myapplication.databinding.ItemLayoutBinding
 import com.example.myapplication.repo.GetNewsModel
 
@@ -17,14 +18,13 @@ class NewsAdapter(private val articles: ArrayList<GetNewsModel.Articles>) : Recy
                 tvDescription.text = article.summary
                 tvPublishedAt.text =article.publishedDate
                 tvTitle.text = article.title
+                Glide.with(myItem.root.context).load(article.media).into(ivArticleImage)
                 root.setOnClickListener {
                     onItemClickListener?.let { it(article) }
                 }
             }
         }
     }
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ArticleViewHolder {
         val itemBinding = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
